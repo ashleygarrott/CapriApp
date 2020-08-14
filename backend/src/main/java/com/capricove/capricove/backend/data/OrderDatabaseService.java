@@ -16,16 +16,6 @@ import java.sql.Statement;
 @Service
 public class OrderDatabaseService {
 
-    @Autowired
-    ConnectionCreator connectionCreator;
-
-    Statement statement;
-    Connection connection;
-    public OrderDatabaseService() throws URISyntaxException, SQLException, ClassNotFoundException {
-        Connection connection = connectionCreator.getConnection();
-        statement = connection.createStatement();
-    }
-
     public void addOrder(){
 
     }

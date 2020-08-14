@@ -2,12 +2,14 @@ package com.capricove.capricove.backend.data;
 
 //returns appropriate menu objects and lists
 
+import com.capricove.capricove.backend.entities.CategoryRow;
+import com.capricove.capricove.backend.entities.MenuRow;
+import com.capricove.capricove.backend.repositories.CategoryRepository;
+import com.capricove.capricove.backend.repositories.MenuRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.rsocket.context.LocalRSocketServerPort;
 import org.springframework.stereotype.Service;
 
 
-import java.net.URISyntaxException;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,48 +21,46 @@ public class MenuService {
     private MenuFactory menuFactory;
 
     @Autowired
-    private ConnectionCreator connectionCreator;
+    private MenuRepository menuRepository;
 
-    private Statement statement;
-    private Connection connection;
+    @Autowired
+    private CategoryRepository categoryRepository;
 
-    public MenuService() throws URISyntaxException, SQLException, ClassNotFoundException {
-        Connection connection = connectionCreator.getConnection();
-        statement = connection.createStatement();
-    }
 
     public List<Menu> getMenusByCategory(String category) throws SQLException {
         List<Menu> menus = new ArrayList<>();
-        String sql = String.format("SELECT id FROM categories WHERE category = '%s'", category);
-        ResultSet result = statement.executeQuery(sql);
-        while(result.next()){
-            int id = result.getInt("id");
-            Menu menu = menuFactory.createMenu(id);
+        List<MenuRow> rows = menuRepository.findByCategory(category);
+
+        for (MenuRow row: rows){
+            Menu menu = menuFactory.createMenu(row.getId());
             menus.add(menu);
         }
 
         return menus;
+
+
+
+
+
     }
 
     public List<Menu> getAllMenus() throws SQLException {
         List<Menu> menus = new ArrayList<>();
-        String sql = String.format("SELECT id FROM menus");
-        ResultSet result = statement.executeQuery(sql);
-        while(result.next()){
-            int id = result.getInt("id");
-            Menu menu = menuFactory.createMenu(id);
+        List<MenuRow> rows = menuRepository.findAll();
+
+        for (MenuRow row: rows){
+            Menu menu = menuFactory.createMenu(row.getId());
             menus.add(menu);
         }
-
         return menus;
     }
 
     public List<String> getCategories() throws SQLException {
         List<String> categories = new ArrayList<>();
-        String sql = String.format("SELECT DISTINCT category FROM categories");
-        ResultSet result = statement.executeQuery(sql);
-        while(result.next()){
-            String category = result.getString("category");
+        List<CategoryRow> rows = categoryRepository.findDistinctCategory();
+
+        for (CategoryRow row: rows){
+            String category = row.getCategory();
             categories.add(category);
         }
         return categories;
