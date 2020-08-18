@@ -2,8 +2,8 @@ package com.capricove.capricove.backend.data;
 
 //returns appropriate menu objects and lists
 
-import com.capricove.capricove.backend.entities.CategoryRow;
-import com.capricove.capricove.backend.entities.MenuRow;
+import com.capricove.capricove.backend.entities.CategoryDAO;
+import com.capricove.capricove.backend.entities.MenuDAO;
 import com.capricove.capricove.backend.repositories.CategoryRepository;
 import com.capricove.capricove.backend.repositories.MenuRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +12,9 @@ import org.springframework.stereotype.Service;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class MenuService {
@@ -29,10 +31,10 @@ public class MenuService {
 
     public List<Menu> getMenusByCategory(String category) throws SQLException {
         List<Menu> menus = new ArrayList<>();
-        List<MenuRow> rows = menuRepository.findByCategory(category);
+        List<CategoryDAO> rows = categoryRepository.findByCategory(category);
 
-        for (MenuRow row: rows){
-            Menu menu = menuFactory.createMenu(row.getId());
+        for (CategoryDAO row: rows){
+            Menu menu = menuFactory.createMenu(row.getMenuId());
             menus.add(menu);
         }
 
@@ -46,9 +48,9 @@ public class MenuService {
 
     public List<Menu> getAllMenus() throws SQLException {
         List<Menu> menus = new ArrayList<>();
-        List<MenuRow> rows = menuRepository.findAll();
+        List<MenuDAO> rows = menuRepository.findAll();
 
-        for (MenuRow row: rows){
+        for (MenuDAO row: rows){
             Menu menu = menuFactory.createMenu(row.getId());
             menus.add(menu);
         }
@@ -56,13 +58,32 @@ public class MenuService {
     }
 
     public List<String> getCategories() throws SQLException {
-        List<String> categories = new ArrayList<>();
-        List<CategoryRow> rows = categoryRepository.findDistinctCategory();
+        Set<String> categories = new HashSet<>();
+        List<String> ret = new ArrayList<>();
+        List<CategoryDAO> rows = categoryRepository.findAll();
 
-        for (CategoryRow row: rows){
+        for (CategoryDAO row: rows){
             String category = row.getCategory();
             categories.add(category);
         }
-        return categories;
+
+        ret.addAll(categories);
+        return ret;
+    }
+
+    public List<ProductCardDTO> getAllMenuCards() {
+        List<MenuDAO> rows = menuRepository.findAll();
+        List<ProductCardDTO> productCards = new ArrayList<>();
+
+        for (MenuDAO row: rows){
+            productCards.add(new ProductCardDTO(row.getName(), row.getDescription(), row.getPrice(), row.getSrc()));
+        }
+
+        return productCards;
+
+    }
+
+    public Menu getMenuById(int id) throws SQLException {
+        return menuFactory.createMenu(id);
     }
 }

@@ -3,6 +3,7 @@ import Router from "vue-router";
 import Home from "../views/Home.vue";
 import Profile from "../views/Profile.vue";
 import Test from "../views/Test.vue"
+import NewHome from "../views/NewHome.vue"
 import { authGuard } from "../auth";
 // import 'bootstrap/dist/css/bootstrap.css'
 
@@ -27,6 +28,11 @@ const router = new Router({
       path: "/test",
       name: "test",
       component: Test
+    },
+    {
+      path: "/newhome",
+      name: "newhome",
+      component: NewHome
     }
   ]
 });

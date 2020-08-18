@@ -1,18 +1,15 @@
 package com.capricove.capricove.backend.repositories;
 
-import com.capricove.capricove.backend.entities.MenuRow;
+import com.capricove.capricove.backend.entities.MenuDAO;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
 
-public interface MenuRepository extends JpaRepository<MenuRow, Integer> {
+public interface MenuRepository extends JpaRepository<MenuDAO, Integer> {
 
-    List<MenuRow> findByCategory(String category);
+    MenuDAO findById(int id);
 
-    MenuRow findById(int id);
-
-    List<MenuRow> findAll();
+    List<MenuDAO> findAll();
 
 
 

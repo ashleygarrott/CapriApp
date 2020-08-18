@@ -62,6 +62,13 @@ export default {
                   )
                 .catch(function (error) {window.console.log(error)});
 
+    this.axios.get('http://localhost:9090/menu/get_all_menus')
+                .then(res => {
+                  window.console.log(res.data)   
+                  }
+                  )
+                .catch(function (error) {window.console.log(error)});
+
     
   },
   methods: {
