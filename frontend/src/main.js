@@ -1,8 +1,6 @@
 import Vue from "vue";
 import App from "./App.vue";
 import router from "./router";
-import axios from 'axios'
-import VueAxios from 'vue-axios'
 import { Auth0Plugin } from "./auth";
 import HighlightJs from "./directives/highlight";
 
@@ -10,8 +8,14 @@ import { library } from "@fortawesome/fontawesome-svg-core";
 import { faLink, faUser, faPowerOff } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import { domain, clientId } from "../auth_config.json";
+import VueCarousel from 'vue-carousel';
+import axios from 'axios'
+import VueAxios from 'vue-axios'
+ 
+
 
 Vue.config.productionTip = false;
+Vue.use(VueCarousel);
 Vue.use(VueAxios, axios)
 Vue.use(Auth0Plugin, {
   domain,

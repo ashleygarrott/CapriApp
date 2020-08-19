@@ -2,10 +2,9 @@ import Vue from "vue";
 import Router from "vue-router";
 import Home from "../views/Home.vue";
 import Profile from "../views/Profile.vue";
-import Test from "../views/Test.vue"
-import NewHome from "../views/NewHome.vue"
+import Test from "../views/Test.vue";
+import Menu from "../views/Menu.vue";
 import { authGuard } from "../auth";
-// import 'bootstrap/dist/css/bootstrap.css'
 
 Vue.use(Router);
 
@@ -30,9 +29,9 @@ const router = new Router({
       component: Test
     },
     {
-      path: "/newhome",
-      name: "newhome",
-      component: NewHome
+      path: "/menu:menuId",
+      name: "menu",
+      component: Menu
     }
   ]
 });
