@@ -1,15 +1,17 @@
 package com.capricove.capricove.backend.entities;
 
+import org.hibernate.annotations.GenericGenerator;
+
 import javax.persistence.*;
 
 @Entity
 @Table(name = "categories", schema = "capriapp")
 public class CategoryDAO {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Id @GeneratedValue(generator="system-uuid")
+    @GenericGenerator(name="system-uuid", strategy = "uuid")
     @Column(name = "rowId")
-    private String RowId;
+    private String rowId;
 
     @Column(name = "menuId")
     private int menuId;
@@ -25,11 +27,11 @@ public class CategoryDAO {
     }
 
     public String getRowId() {
-        return RowId;
+        return rowId;
     }
 
     public void setRowId(String rowId) {
-        RowId = rowId;
+        this.rowId = rowId;
     }
 
     public int getMenuId() {

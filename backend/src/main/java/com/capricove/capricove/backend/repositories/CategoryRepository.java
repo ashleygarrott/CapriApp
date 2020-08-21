@@ -11,8 +11,7 @@ public interface CategoryRepository extends JpaRepository<CategoryDAO, String> {
 
     List<CategoryDAO> findAll();
 
-    List<CategoryDAO> findByMenuId(int id);
-
+    List<CategoryDAO> findByMenuId(int menuId);
 
 
 }

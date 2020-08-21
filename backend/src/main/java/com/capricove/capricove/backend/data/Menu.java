@@ -6,7 +6,20 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Menu {
-    public Menu(int id, String name, String section, List<String> categories, int price, String src, String description, List<String> tags, Map<String, HashMap<String, Integer>> options) {
+
+    private int id;
+    private String name;
+    private String section;
+    private List<String> categories;
+    private int price;
+    private String src;
+    private List<String> tags;
+    private String description;
+    private List<OptionCategory> optionCategories;
+
+
+
+    public Menu(int id, String name, String section, List<String> categories, int price, String src, String description, List<String> tags, List<OptionCategory> optionCategories) {
         this.id = id;
         this.name = name;
         this.section = section;
@@ -15,7 +28,7 @@ public class Menu {
         this.src = src;
         this.description = description;
         this.tags = tags;
-        this.options = options;
+        this.optionCategories = optionCategories;
     }
 
     public Menu(int id, String name, String section, int price, String src, String description) {
@@ -26,7 +39,7 @@ public class Menu {
         this.price = price;
         this.src = src;
         this.description = description;
-        this.options = new HashMap<String, HashMap<String, Integer>>();
+        this.optionCategories = new ArrayList<OptionCategory>();
         this.tags = new ArrayList<String>();
         this.categories = new ArrayList<>();
     }
@@ -41,12 +54,17 @@ public class Menu {
         }
     }
 
-    public void addOption(String option_category, String option_name, int option_price){
-        if (!options.containsKey(option_category)){
-            options.put(option_category, new HashMap<String, Integer>());
+    public void addOption(String optionCategory, String optionName, int optionPrice){
+        for (OptionCategory oc: this.optionCategories){
+            if (oc.getOptionCategoryName().equals(optionCategory)){
+                oc.addOption(optionName, optionPrice);
+                return;
+            }
         }
 
-        options.get(option_category).put(option_name, option_price);
+        OptionCategory optionCategoryObject = new OptionCategory(optionCategory);
+        optionCategoryObject.addOption(optionName, optionPrice);
+        this.optionCategories.add(optionCategoryObject);
     }
 
     public void addCategory(String category){
@@ -118,23 +136,16 @@ public class Menu {
 
 
 
-    private int id;
-    private String name;
-    private String section;
-    private List<String> categories;
-    private int price;
-    private String src;
-    private List<String> tags;
 
-    public Map<String, HashMap<String, Integer>> getOptions() {
-        return options;
+
+    public List<OptionCategory> getOptionCategories() {
+        return optionCategories;
     }
 
-    public void setOptions(Map<String, HashMap<String, Integer>> options) {
-        this.options = options;
+    public void setOptionCategories(List<OptionCategory> optionCategories) {
+        this.optionCategories = optionCategories;
     }
 
-    private Map<String, HashMap<String, Integer>> options;
 
     public String getDescription() {
         return description;
@@ -144,5 +155,4 @@ public class Menu {
         this.description = description;
     }
 
-    private String description;
 }

@@ -4,11 +4,28 @@
 
     
     <div class="page-content-wrapper">
+      <div>
+        <search-bar />
+      </div>
+
+      <div class="row d-flex justify-content-center">
+        <div v-if="$parent.deliveryInfo!={}">
+          <div class="d-flex justify-content-center text-center px-4 mb-0">
+            <p style="color:lightgrey;font-size:0.5rem">{{$parent.shortenedAddress}}</p>
+            <p style="color:white">a</p>
+            <p style="font-size:0.5rem;color:#55d6d0">({{$parent.deliveryInfo.distance.humanReadable}}/{{$parent.deliveryInfo.duration.humanReadable}}/฿{{$parent.deliveryInfo.deliveryFee}})</p>
+          </div>
+        </div>
+
+        <div v-if="$parent.deliveryInfo=={}">
+          <p style="color:lightgrey;font-size:0.5rem">We can not yet determine your location</p>
+        </div>
+      </div>
       <!-- Hero Slides-->
       <div class="hero-slides owl-carousel">
         <carousel ref="carousel" :perPage="1">
           <slide>
-            <img src="https://previews.123rf.com/images/revelstockart/revelstockart1802/revelstockart180200130/96393376-retro-futuristic-promotion-banner-scroll-price-tag-vector-illustration.jpg" style="width: 100%; height: 10rem">
+            <img src="https://1112.minorcdn.com/1112/public/images/products/promotion/NOV2018/Promotion-Banner-Set_KHOOM-KROB-KREUNG-269-th.jpg" style="width: 100%; height: 10rem">
           </slide>
            <slide>
             <img src="https://previews.123rf.com/images/revelstockart/revelstockart1802/revelstockart180200130/96393376-retro-futuristic-promotion-banner-scroll-price-tag-vector-illustration.jpg" style="width: 100%; height: 10rem">
@@ -18,81 +35,85 @@
       <!-- Product Catagories-->
       <div class="product-catagories-wrapper py-3">
         <div class="container">
-          <div class="section-heading">
+          <div class="section-heading d-flex align-items-center justify-content-between">
             <h6 class="ml-1">Our categories</h6>
+            <a class="btn  btn-sm" href="shop-grid.html" style="color:white;background-color:#55d6d0">View All</a>
           </div>
+        
           <div class="product-catagory-wrap">
             <div class="row">
               <!-- Single Catagory Card-->
               <div class="col-4 categoryCard">
-                <a href = "#">
+                <router-link :to="{ name: 'category', params: { categoryName: 'pizza' }}">
                   <div class="roundedCard" style="background-image: url('https://www.newyorkpizza.co.th/wp-content/uploads/2018/07/Featured_Main.jpg')"></div>
                   <div>
                     <p class = "categoryText  text-center"> Pizza </p>
                   </div>
-                </a>
+                </router-link>
               </div>
               <!-- Single Catagory Card-->
               <div class="col-4 categoryCard">
-                <a href = "#">
+                <router-link :to="{ name: 'category', params: { categoryName: 'pasta' }}">
                   <div class="roundedCard" style="background-image: url('https://www.newyorkpizza.co.th/wp-content/uploads/2018/07/Featured_Main.jpg')"></div>
                   <div>
-                    <p class = "categoryText  text-center"> Pizza </p>
+                    <p class = "categoryText  text-center"> Pasta </p>
                   </div>
-                </a>
+                </router-link>
               </div>
               <!-- Single Catagory Card-->
               <div class="col-4 categoryCard">
-                <a href = "#">
+                <router-link :to="{ name: 'category', params: { categoryName: 'thai food' }}">
                   <div class="roundedCard" style="background-image: url('https://www.newyorkpizza.co.th/wp-content/uploads/2018/07/Featured_Main.jpg')"></div>
                   <div>
-                    <p class = "categoryText  text-center"> Pizza </p>
+                    <p class = "categoryText  text-center"> Thai Food </p>
                   </div>
-                </a>
+                </router-link>
               </div>
               <!-- Single Catagory Card-->
               <div class="col-4 categoryCard">
-                <a href = "#">
+                <router-link :to="{ name: 'category', params: { categoryName: 'salad' }}">
                   <div class="roundedCard" style="background-image: url('https://www.newyorkpizza.co.th/wp-content/uploads/2018/07/Featured_Main.jpg')"></div>
                   <div>
-                    <p class = "categoryText  text-center"> Pizza </p>
+                    <p class = "categoryText  text-center"> Salad </p>
                   </div>
-                </a>
+                </router-link>
               </div>
               <!-- Single Catagory Card-->
               <div class="col-4 categoryCard">
-                <a href = "#">
+                <router-link :to="{ name: 'category', params: { categoryName: 'grilled bread' }}">
                   <div class="roundedCard" style="background-image: url('https://www.newyorkpizza.co.th/wp-content/uploads/2018/07/Featured_Main.jpg')"></div>
                   <div>
-                    <p class = "categoryText  text-center"> Pizza </p>
+                    <p class = "categoryText  text-center"> Grilled Bread </p>
                   </div>
-                </a>
+                </router-link>
               </div>
               <!-- Single Catagory Card-->
               <div class="col-4 categoryCard">
-                <a href = "#">
+                <router-link :to="{ name: 'category', params: { categoryName: 'appetizer' }}">
                   <div class="roundedCard" style="background-image: url('https://www.newyorkpizza.co.th/wp-content/uploads/2018/07/Featured_Main.jpg')"></div>
                   <div>
-                    <p class = "categoryText  text-center"> Pizza </p>
+                    <p class = "categoryText  text-center"> Appetizer </p>
                   </div>
-                </a>
+                </router-link>
               </div>
             </div>
           </div>
         </div>
       </div>
+
+      
       
       <!-- Top Products-->
       <div class="top-products-area clearfix py-3">
         <div class="container">
           <div class="section-heading d-flex align-items-center justify-content-between">
-            <h6 class="ml-1">Top Products</h6><a class="btn btn-danger btn-sm" href="shop-grid.html">View All</a>
+            <h6 class="ml-1">Top Products</h6>
           </div>
           <div class="row">
             <!-- Single Top Product Card-->
             <div class="col-6 col-md-4 col-lg-3" v-for="(productCard, index) in topProductCards" :key="index">
               <router-link :to="{ name: 'menu', params: { menuId: 1 }}">
-                <div class="card menuCard">
+                <div class="card menuCard roundedCard">
                   <img class="card-img-top roundedImage" src="https://www.newyorkpizza.co.th/wp-content/uploads/2018/07/Featured_Main.jpg" alt="Card image cap">
                   <div class="cardBody">
                     <p class="card-title text-center">{{productCard.name}}</p>
@@ -114,7 +135,13 @@
 </template>
 
 <script>
+
+  import SearchBar from "../components/SearchBar"
+
   export default {
+    components: {
+      SearchBar
+    },
     name: "Test",
     data() {
       return {
@@ -150,7 +177,9 @@
 <style scoped>
 
   .categoryText {
-    font-size: 0.75rem;
+    font-size: 1rem;
+    color: black;
+    margin-top: 0.33rem;
   }
 
   .categoryCard {
@@ -160,7 +189,7 @@
 
 .roundedCard {
   border-radius: 25px;
-  border: 2px solid #73AD21;
+  border: 2px solid #49b3cd;
   padding: 0px;
   width: 100%;
   height: 5rem;

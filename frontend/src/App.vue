@@ -1,16 +1,7 @@
 <template>
   <div id="app" class="d-flex flex-column h-100">
     <!-- header area -->
-    <div class="headerArea fixed-top d-flex justify-content-center" id="headerArea">
-        <!-- Search Form-->
-        <div class="top-search-form ">
-          <form action="" method="">
-            <button type="submit"><i class="fa fa-search"></i></button>
-            <input class="form-group" type="search" placeholder="Enter your keyword">
-          </form>
-        </div>
-
-    </div>
+  
     <!-- body area -->
     <div class="container flex-grow-1 bodyArea">
       <error />
@@ -29,20 +20,80 @@
 <script>
 import NavBar from "./components/NavBar";
 import Error from "./components/Error";
+import SearchBar from "./components/SearchBar"
 
 export default {
   components: {
     NavBar,
-    Error
+    Error,
+    SearchBar
   },
   data() {
       return {
-        orders: []
+        orders:[],
+        deliveryInfo: {}
       }
     },
-    mounted() {
+    created() {
+      if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(this.savePosition , 
+            function showError(error) {
+            switch(error.code) {
+              case error.PERMISSION_DENIED:
+                this.deliveryInfo = {}
+                break;
+              case error.POSITION_UNAVAILABLE:
+                this.deliveryInfo = {}
+                break;
+              case error.TIMEOUT:
+                this.deliveryInfo = {}
+                break;
+              case error.UNKNOWN_ERROR:
+                this.deliveryInfo = {}
+                break;
+            }
+});
+        } else {
+            window.console.log("Geolocation is not supported by this browser.")
+            this.deliveryInfo = {}
+        }
+
       
+
+      
+    },
+
+    mounted() {
+      this.axios.get("http://localhost:9090/test/add_menus")
+      
+    },
+
+  methods: {
+    savePosition(position) {
+      this.latitude = position.coords.latitude
+      this.longitude = position.coords.longitude
+      window.console.log(this.latitude)
+
+      this.axios.post('http://localhost:9090/processor/get_delivery_fee', {
+        latitude: this.latitude,
+        longitude: this.longitude
+      })
+      .then(res => {
+      window.console.log(res.data)
+      this.deliveryInfo = res.data
+
+      if (this.deliveryInfo.destination.length > 50){
+        this.shortenedAddress = this.deliveryInfo.destination.substring(0, 50) + "..."
+      }
+      else (this.shortenedAddress = this.deliveryInfo.destination)
+
+      }
+      )
+      .catch(function (error) {window.console.log(error)});
     }
+  },
+
+
 };
 </script>
 
@@ -50,17 +101,20 @@ export default {
 <style scoped>
   #footer {
   height: 50px;
-  background-color: #4f86d8;
+  background-color: white;
+  box-shadow: 3px 4px 5px 6px lightgrey;
   opacity:1;
 }
 
 .bodyArea {
-  background-color: lightblue;
+  background-color: white;
 }
 
 .headerArea {
-  background-color: whitesmoke;
+  background-color: #42ccc9;
   height: 2.5rem;
+  box-shadow: 3px 4px 5px 6px lightgrey;
+
 }
 
 .pageBottom {

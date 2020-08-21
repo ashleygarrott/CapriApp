@@ -3,28 +3,28 @@
   <div class="col-12">
   <div class="row" id="bottomNav">
     <div class="col-3 text-center">
-      <a href="#" class = "text-light">
+      <router-link :to="{ name: 'home'}" style="color:#49b3cd">
         <i class="fas fa-home navIcon"></i>
         <p class = "navbarText">Home</p>
-      </a>
+      </router-link>
     </div>
     <div class="col-3 text-center">
-      <a href="#" class = "text-light">
+      <router-link :to="{ name: 'cart'}" style="color:#49b3cd">
         <i class="fas fa-shopping-cart navIcon"></i>
         <p class = "navbarText">Cart</p>
-      </a>
+      </router-link>
     </div>
     <div class="col-3 text-center">
-      <a href="#" class = "text-light">
+      <router-link :to="{ name: 'support'}" style="color:#49b3cd">
         <i class="fas fa-question navIcon"></i>
         <p class = "navbarText">Support</p>
-      </a>
+      </router-link>
     </div>
     <div class="col-3 text-center">
-      <a href="#" class = "text-light">
+      <router-link :to="{ name: 'account'}" style="color:#49b3cd">
         <i class="fas fa-user navIcon"></i>
         <p class = "navbarText">Account</p>
-      </a>
+      </router-link>
     </div>
 
   </div>

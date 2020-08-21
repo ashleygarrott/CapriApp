@@ -7,6 +7,7 @@ import javax.persistence.*;
 public class MenuDAO {
 
     @Id
+    @Column
     private int id;
 
     @Column(name = "name")
