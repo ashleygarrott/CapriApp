@@ -25,9 +25,14 @@ public class MenuController {
     }
 
     @GetMapping("/get_all_menu_cards")
-    public List<ProductCardDTO> getAllMenus() throws SQLException {
+    public List<ProductCardDTO> getAllMenuCards() throws SQLException {
         return menuService.getAllMenuCards();
 
+    }
+
+    @GetMapping("/get_all_menus")
+    public List<Menu> getAllMenus() throws SQLException {
+        return menuService.getAllMenus();
     }
 
     @PostMapping("/get_menu_item")

@@ -3,35 +3,37 @@
         <div>
             <search-bar />
         </div>
-        <div class="container-fluid">
-            <div v-if="$parent.orders.length < 1">
-                You current have no orders in your basket
-            </div>
-            <div class="row" v-if="$parent.orders.length > 0">
-                <div class="card ordersCard">
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item" v-for="(order, index) in $parent.orders" :key="index">
-                            <div class="row">
-                                <div class = "col-2 px-0">
-                                    <i class="fas fa-times-circle"></i>
-                                </div>
-                                <div class = "col-6 px-0">
-                                    <p>{{order.menuName}}</p>
-                                </div>
-                                <div class = "col-2 px-0">
-                                    <p style="font-size:0.7rem;">{{order.orderPrice}}</p>
-                                </div>
-                                <div class = "col-2 px-0">
-                                <p style="font-size:0.7rem;">{{order.quantity}}</p>
-                                </div>
-                            </div>
-                        </li>
-                    </ul>
+        <div class="container flex-grow-1 bodyArea">
+            <div class="container flex-grow-1">
+                <div v-if="$parent.orders.length < 1">
+                    You current have no orders in your basket
                 </div>
-            </div>
+                <div class="row" v-if="$parent.orders.length > 0">
+                    <div class="card ordersCard shadowed">
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item" v-for="(order, index) in $parent.orders" :key="index">
+                                <div class="row">
+                                    <div class = "col-2 px-0">
+                                        <i class="fas fa-times-circle"></i>
+                                    </div>
+                                    <div class = "col-6 px-0">
+                                        <p>{{order.menuName}}</p>
+                                    </div>
+                                    <div class = "col-2 px-0">
+                                        <p style="font-size:0.7rem;">{{order.orderPrice}}</p>
+                                    </div>
+                                    <div class = "col-2 px-0">
+                                    <p style="font-size:0.7rem;">{{order.quantity}}</p>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
 
-            <div class="row" v-if="$parent.orders.length > 0" >
+                <div class="row mt-2" v-if="$parent.orders.length > 0" >
                     <button v-on:click="submitOrder()" type="button" class="btn btn-primary">Order</button>
+                </div>
             </div>
         </div>
     </div>
@@ -78,7 +80,7 @@ export default {
                 orders: finalOrders
             }
 
-            this.axios.post('http://localhost:9090/order/make_order', orderDTO)
+            this.axios.post('https://capriapp-backend.herokuapp.com/order/make_order', orderDTO)
             .then(res => {
             window.console.log(res.data)
             this.$parent.orders = []
@@ -98,6 +100,10 @@ export default {
     .ordersCard {
         width: 100%;
     }
+    .shadowed {
+    box-shadow: 2px 2px 3px 2px lightgrey;
+
+}
 
 
 </style>

@@ -6,7 +6,7 @@ import javax.persistence.*;
 
 
 @Entity
-@Table(name = "order_details", schema = "capriapp")
+@Table(name = "order_details")
 public class OrderDetailsDAO {
 
     @Id

@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -33,6 +34,7 @@ public class MenuFactory {
 
     public Menu createMenu(int id) throws SQLException {
 
+        List<Integer> optionPrices = new ArrayList<>();
 
         MenuDAO menuDAO = menuRepository.findById(id);
         Menu menu = new Menu(menuDAO.getId(), menuDAO.getName(), menuDAO.getSection(), menuDAO.getPrice(), menuDAO.getSrc(), menuDAO.getDescription());
@@ -49,10 +51,41 @@ public class MenuFactory {
 
         List<OptionDAO> optionDAOS = optionRepository.findByMenuId(id);
         for (OptionDAO row: optionDAOS){
+            optionPrices.add(row.getOptionPrice());
             menu.addOption(row.getOptionCategory(), row.getOptionName(), row.getOptionPrice());
+        }
+
+        if (menu.getPrice() == 0){
+            menu.setDisplayPrice(min(optionPrices) + " - " + max(optionPrices));
+        }
+        else{
+            menu.setDisplayPrice(String.valueOf(menu.getPrice()));
         }
 
         return menu;
     }
+
+    private int max(List<Integer> list){
+        int max = list.get(0);
+        for (Integer el: list){
+            if (el > max){
+                max = el;
+            }
+        }
+
+        return max;
+    }
+
+    private int min(List<Integer> list){
+        int min = list.get(0);
+        for (Integer el: list){
+            if (el < min){
+                min = el;
+            }
+        }
+
+        return min;
+    }
+
 }
 

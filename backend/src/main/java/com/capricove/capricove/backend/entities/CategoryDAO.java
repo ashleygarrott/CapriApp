@@ -5,7 +5,7 @@ import org.hibernate.annotations.GenericGenerator;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "categories", schema = "capriapp")
+@Table(name = "categories")
 public class CategoryDAO {
 
     @Id @GeneratedValue(generator="system-uuid")

@@ -3,7 +3,7 @@ package com.capricove.capricove.backend.entities;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "menus", schema = "capriapp")
+@Table(name = "menus")
 public class MenuDAO {
 
     @Id

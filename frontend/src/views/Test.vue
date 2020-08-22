@@ -9,7 +9,7 @@
 export default {
     name: "Test",
     mounted() {
-        this.axios.get("http://localhost:9090/test/add_menus")
+        this.axios.get("https://capriapp-backend.herokuapp.com/test/add_menus")
     }
 }
 </script>

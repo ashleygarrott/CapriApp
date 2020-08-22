@@ -27,8 +27,8 @@ public class ProcessingService {
             DistanceMatrixRow[] distanceMatrixRows = distanceMatrix.rows;
             DistanceMatrixRow distanceMatrixRow = distanceMatrixRows[0];
             DistanceMatrixElement distanceMatrixElement = distanceMatrixRow.elements[0];
-            Duration duration = new Duration(); //distanceMatrixElement.duration;
-            Distance distance = new Distance(); //distanceMatrixElement.distance;
+            Duration duration = new Duration();//distanceMatrixElement.duration;
+            Distance distance = new Distance();//distanceMatrixElement.distance;
             int deliveryFee = calculateDeliveryFee((int) distance.inMeters);
             return new DeliveryDTO(distance, duration, destination, deliveryFee);
         }

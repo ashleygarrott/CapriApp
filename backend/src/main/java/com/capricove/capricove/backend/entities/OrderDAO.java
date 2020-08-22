@@ -3,7 +3,7 @@ package com.capricove.capricove.backend.entities;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "orders", schema = "capriapp")
+@Table(name = "orders")
 public class OrderDAO {
 
     @Id

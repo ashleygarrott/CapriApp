@@ -12,6 +12,7 @@ public class Menu {
     private String section;
     private List<String> categories;
     private int price;
+    private String displayPrice;
     private String src;
     private List<String> tags;
     private String description;
@@ -155,4 +156,11 @@ public class Menu {
         this.description = description;
     }
 
+    public String getDisplayPrice() {
+        return displayPrice;
+    }
+
+    public void setDisplayPrice(String displayPrice) {
+        this.displayPrice = displayPrice;
+    }
 }

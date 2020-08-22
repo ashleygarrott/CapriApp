@@ -38,17 +38,17 @@ public class DataSourceConfig {
     @Bean
     public DataSource dataSource() throws URISyntaxException {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
-//        URI dbUri = new URI(System.getenv("DATABASE_URL"));
-//
-//        dataSource.setDriverClassName("org.postgresql.Driver");
-//        dataSource.setUsername(dbUri.getUserInfo().split(":")[0]);
-//        dataSource.setPassword(dbUri.getUserInfo().split(":")[1]);
-//        dataSource.setUrl("jdbc:postgresql://" + dbUri.getHost() + dbUri.getPath());
 
+        URI dbUri = new URI(System.getenv("DATABASE_URL"));
         dataSource.setDriverClassName("org.postgresql.Driver");
-        dataSource.setUsername("postgres");
-        dataSource.setPassword("howareyou1");
-        dataSource.setUrl("jdbc:postgresql://localhost:5432/postgres?currentSchema=capriapp");
+        dataSource.setUsername(dbUri.getUserInfo().split(":")[0]);
+        dataSource.setPassword(dbUri.getUserInfo().split(":")[1]);
+        dataSource.setUrl("jdbc:postgresql://" + dbUri.getHost() + dbUri.getPath());
+
+//        dataSource.setDriverClassName("org.postgresql.Driver");
+//        dataSource.setUsername("postgres");
+//        dataSource.setPassword("howareyou1");
+//        dataSource.setUrl("jdbc:postgresql://localhost:5432/postgres?currentSchema=capriapp");
         return dataSource;
     }
 }

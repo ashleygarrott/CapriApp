@@ -10,6 +10,10 @@ public class ProductCardDTO {
 
     private String src;
 
+    private int maxOptionPrice;
+
+    private int minOptionPrice;
+
     public ProductCardDTO(String name, String description, int price, String src) {
         this.name = name;
         this.description = description;
@@ -47,5 +51,21 @@ public class ProductCardDTO {
 
     public void setSrc(String src) {
         this.src = src;
+    }
+
+    public int getMaxOptionPrice() {
+        return maxOptionPrice;
+    }
+
+    public void setMaxOptionPrice(int maxOptionPrice) {
+        this.maxOptionPrice = maxOptionPrice;
+    }
+
+    public int getMinOptionPrice() {
+        return minOptionPrice;
+    }
+
+    public void setMinOptionPrice(int minOptionPrice) {
+        this.minOptionPrice = minOptionPrice;
     }
 }
