@@ -206,7 +206,7 @@
         
 
 
-        var order = {
+        var item = {
           menuId: this.id,
           menuName: this.menu.name,
           menuOptions: selectedOptions,
@@ -214,9 +214,9 @@
           quantity: this.quantity
         }
 
-        window.console.log(order)
+        window.console.log(item)
 
-        this.$parent.orders.push(order)
+        this.$parent.orders.push(item)
 
         this.$router.push({ name: 'cart'})
 

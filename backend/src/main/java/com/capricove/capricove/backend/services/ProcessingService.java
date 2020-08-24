@@ -23,7 +23,7 @@ public class ProcessingService {
 
         try{
             DistanceMatrix distanceMatrix = DistanceMatrixApi.getDistanceMatrix(geoAPIService.getContext(), cpc, dest).await();
-            String destination = "";//distanceMatrix.destinationAddresses[0];
+            String destination = "sample destination";//distanceMatrix.destinationAddresses[0];
             DistanceMatrixRow[] distanceMatrixRows = distanceMatrix.rows;
             DistanceMatrixRow distanceMatrixRow = distanceMatrixRows[0];
             DistanceMatrixElement distanceMatrixElement = distanceMatrixRow.elements[0];

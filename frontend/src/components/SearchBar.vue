@@ -24,7 +24,7 @@
             </div>
           </div>
           <div class="col-2 d-flex justify-content-center my-auto" v-if="$auth.isAuthenticated">
-            <p style="color:white">{{$auth.user.name}}</p>
+            <p style="color:white">{{$auth.user.given_name}}</p>
           </div>
             </div>
 </template>

@@ -4,12 +4,14 @@ import com.capricove.capricove.backend.data.Menu;
 import com.capricove.capricove.backend.services.AppDataService;
 import com.capricove.capricove.backend.services.MenuService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.sql.SQLException;
 
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/test")
 public class TestController {

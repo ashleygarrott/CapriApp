@@ -7,6 +7,7 @@ import Menu from "../views/Menu.vue";
 import Cart from "../views/Cart.vue"
 import PostOrder from "../views/PostOrder.vue"
 import Category from "../views/Category.vue"
+import OpenOrders from "../views/OpenOrders.vue"
 import { authGuard } from "../auth";
 
 Vue.use(Router);
@@ -50,6 +51,11 @@ const router = new Router({
       path: "/category:categoryName",
       name: "category",
       component: Category
+    },
+    {
+      path: "/orders",
+      name: "openOrders",
+      component: OpenOrders
     }
   ]
 });

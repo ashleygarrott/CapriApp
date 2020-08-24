@@ -3,6 +3,7 @@ package com.capricove.capricove.backend.entities;
 import com.capricove.capricove.backend.repositories.OrderDetailRepository;
 
 import javax.persistence.*;
+import java.util.List;
 
 
 @Entity
@@ -23,12 +24,24 @@ public class OrderDetailsDAO {
     @Column
     private int quantity;
 
+    @Column
+    private String menuName;
+
+    @Column
+    private String options;
+
+    @Column
+    private int menuPrice;
+
     public OrderDetailsDAO(){}
 
-    public OrderDetailsDAO(String orderId, int menuId, int quantity) {
+    public OrderDetailsDAO(String orderId, int menuId, int quantity, String menuName, String options, int menuPrice) {
         this.orderId = orderId;
         this.menuId = menuId;
         this.quantity = quantity;
+        this.menuName = menuName;
+        this.options = options;
+        this.menuPrice = menuPrice;
     }
 
     public int getRowId() {
@@ -61,5 +74,29 @@ public class OrderDetailsDAO {
 
     public void setQuantity(int quantity) {
         this.quantity = quantity;
+    }
+
+    public String getMenuName() {
+        return menuName;
+    }
+
+    public void setMenuName(String menuName) {
+        this.menuName = menuName;
+    }
+
+    public String getOptions() {
+        return options;
+    }
+
+    public void setOptions(String options) {
+        this.options = options;
+    }
+
+    public int getMenuPrice() {
+        return menuPrice;
+    }
+
+    public void setMenuPrice(int menuPrice) {
+        this.menuPrice = menuPrice;
     }
 }

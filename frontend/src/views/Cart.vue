@@ -65,7 +65,10 @@ export default {
             for (var i=0;i<this.$parent.orders.length;i++){
                 var obj = {
                     menuId: this.$parent.orders[i].menuId,
-                    quantity: this.$parent.orders[i].quantity
+                    quantity: this.$parent.orders[i].quantity,
+                    menuName: this.$parent.orders[i].menuName,
+                    menuPrice: this.$parent.orders[i].orderPrice,
+                    options: this.$parent.orders[i].menuOptions
                 }
                 totalPrice += this.$parent.orders[i].orderPrice
                 finalOrders.push(obj)
@@ -73,12 +76,32 @@ export default {
 
             var email = this.$auth.isAuthenticated ? this.$auth.user.email : "guest"
 
-            var orderDTO = {
+            var orderDTO
+            if (this.$parent.deliveryInfo != {}){
+                orderDTO = {
                 userId: email,
                 orderPrice: totalPrice,
                 orderType: "delivery",
-                orders: finalOrders
+                orders: finalOrders,
+                address: this.$parent.deliveryInfo.destination,
+                latitude: this.$parent.latitude,
+                longitude: this.$parent.longitude,
+                locationNotes: ""
+
+
             }
+            }
+            else{
+                orderDTO = {
+                userId: email,
+                orderPrice: totalPrice,
+                orderType: "delivery",
+                orders: finalOrders,
+                locationNotes: ""
+            }
+            }
+
+            
 
             this.axios.post('https://capriapp-backend.herokuapp.com/order/make_order', orderDTO)
             .then(res => {

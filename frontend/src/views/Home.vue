@@ -156,43 +156,41 @@
     data() {
       return {
         topProductCards: [],
-        deliveryInfo: {}
+        deliveryInfo: {
+          deliveryFee: 0, 
+          destination: "",
+          distance: {
+            humanReadable: "",
+            inMeters: 0
+          },
+          duration: {
+            humanReadable: "",
+            inSeconds: 0
+          },
+          shortenedAddress: "sample destination"
+        }
       }
     },
     created(){
-      if (navigator.geolocation) {
-          navigator.geolocation.getCurrentPosition(this.savePosition , 
-            function showError(error) {
-            switch(error.code) {
-              case error.PERMISSION_DENIED:
-                this.deliveryInfo = {}
-                break;
-              case error.POSITION_UNAVAILABLE:
-                this.deliveryInfo = {}
-                break;
-              case error.TIMEOUT:
-                this.deliveryInfo = {}
-                break;
-              case error.UNKNOWN_ERROR:
-                this.deliveryInfo = {}
-                break;
-            }
-});
-        } else {
-            window.console.log("Geolocation is not supported by this browser.")
-            this.deliveryInfo = {}
-        }
+      
     },
     mounted() {
 
       this.axios.get('https://capriapp-backend.herokuapp.com/menu/get_all_menus')
-          .then(res => {
-          this.topProductCards = res.data
-          window.console.log(this.topProductCards)
+      .then(res => {
+      this.topProductCards = res.data
+      window.console.log(this.topProductCards)
 
-          }
-          )
-        .catch(function (error) {window.console.log(error)});
+      }
+      )
+      .catch(function (error) {window.console.log(error)});
+
+      window.console.log(this.$auth)
+
+
+
+
+      
       
     },
     methods: {
@@ -203,31 +201,11 @@
       destroyCard() {
 
        
-      },
-      savePosition(position) {
-      this.latitude = position.coords.latitude
-      this.longitude = position.coords.longitude
-      window.console.log(this.latitude)
-
-      this.axios.post('https://capriapp-backend.herokuapp.com/processor/get_delivery_fee', {
-        latitude: this.latitude,
-        longitude: this.longitude
-      })
-      .then(res => {
-      window.console.log(res.data)
-      this.deliveryInfo = res.data
-
-      if (this.deliveryInfo.destination.length > 50){
-        this.deliveryInfo.shortenedAddress = this.deliveryInfo.destination.substring(0, 50) + "..."
       }
-      else (this.deliveryInfo.shortenedAddress = this.deliveryInfo.destination)
-
-      }
-      )
-      .catch(function (error) {window.console.log(error)});
+      
     }
     }
-  }
+  
 </script>
 
 
